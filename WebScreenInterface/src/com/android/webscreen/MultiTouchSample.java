@@ -1,3 +1,5 @@
+package com.android.webscreen;
+
 import com.android.chimpchat.adb.AdbBackend;
 import com.android.chimpchat.core.IChimpDevice;
 import com.android.chimpchat.core.TouchPressType;

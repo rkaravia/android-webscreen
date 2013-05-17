@@ -1,3 +1,5 @@
+package com.android.webscreen;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
