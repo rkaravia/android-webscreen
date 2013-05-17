@@ -3,9 +3,9 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="lib" path="../WebScreen/lib/common.jar"/>
+	<classpathentry kind="lib" path="../WebScreen/lib/chimpchat_custom.jar"/>
 	<classpathentry kind="lib" path="../WebScreen/lib/sdklib.jar"/>
 	<classpathentry kind="lib" path="../WebScreen/lib/ddmlib.jar"/>
 	<classpathentry kind="lib" path="../WebScreen/lib/guava-13.0.1.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/chimpchat"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
