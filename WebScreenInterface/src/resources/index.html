@@ -59,9 +59,9 @@
         addMouseEvent(e, $(this).offset(), "mousedown");
       });
       $('img').mousemove(function(e) {
-        // if (mouseIsDown) {
+        if (mouseIsDown) {
           addMouseEvent(e, $(this).offset(), "mousemove");
-        // }
+        }
       });
       $('img').mouseup(function(e) {
         mouseIsDown = false;
