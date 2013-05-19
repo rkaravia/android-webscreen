@@ -12,21 +12,79 @@
         setTimeout(nextImage, 500);
       };
     };
+
+    var mouseQueue = [];
+    var mouseSending = false;
+    var mouseIsDown = false;
+    function sendMouseEvent() {
+      if (!mouseSending && mouseQueue.length != 0) {
+        mouseSending = true;
+        var mouseEvent = mouseQueue.shift();
+        $.get('http://localhost:8080/' + mouseEvent.type + '?x=' + mouseEvent.x + '&y=' + mouseEvent.y, function() {
+          mouseSending = false;
+          sendMouseEvent();
+        });
+      }
+    }
+    
+    function addMouseEvent(e, offset, type) {
+      var x = e.clientX - offset.left;
+      var y = e.clientY - offset.top;
+      mouseQueue.push({
+        type: type,
+        x: x,
+        y: y
+      });
+      sendMouseEvent();
+    }
+    
+    var keyQueue = [];
+    var keySending = false;
+    function sendKey() {
+      if (!keySending && keyQueue.length != 0) {
+        keySending = true;
+        $.get('http://localhost:8080/key?key=' + keyQueue.shift(), function() {
+          keySending = false;
+          sendKey();
+        });
+      }
+    }
+    
     $(document).ready(function() {
       nextImage();
-      $('img').click(function(e) {
-        var offset = $(this).offset();
-        var x = e.clientX - offset.left;
-        var y = e.clientY - offset.top;
-        $.get('http://localhost:8080/click?x='+x+'&y='+y);
+      
+      $('img').mousedown(function(e) {
+        mouseIsDown = true;
+        e.preventDefault();
+        addMouseEvent(e, $(this).offset(), "mousedown");
       });
-      $(document).keypress(function(e) {
-        $.get('http://localhost:8080/key?key='+e.which);
+      $('img').mousemove(function(e) {
+        // if (mouseIsDown) {
+          addMouseEvent(e, $(this).offset(), "mousemove");
+        // }
+      });
+      $('img').mouseup(function(e) {
+        mouseIsDown = false;
+        addMouseEvent(e, $(this).offset(), "mouseup");
+      });
+      
+      $('html').keypress(function(e) {
+        keyQueue.push(e.which);
+        sendKey();
+      });
+      $('html').keydown(function(e) {
+        if (e.which <= 46) {
+          if (e.which == 8) {
+            e.preventDefault();
+          }
+          keyQueue.push(e.which);
+          sendKey();
+        }
       });
     });
   </script>
 </head>
 <body>
-    <img src="screen" >
+    <img src="screen" />
 </body>
 </html>

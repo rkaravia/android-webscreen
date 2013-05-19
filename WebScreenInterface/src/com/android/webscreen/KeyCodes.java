@@ -108,6 +108,12 @@ public class KeyCodes {
 	private static Map<Integer, String> TRANSLATE = new HashMap<Integer, String>() {{
 		put(8, "KEYCODE_DEL");
 		put(13, "KEYCODE_ENTER");
+		put(27, "KEYCODE_BACK");
+		put(36, "KEYCODE_HOME");
+		put(37, "KEYCODE_DPAD_LEFT");
+		put(38, "KEYCODE_DPAD_UP");
+		put(39, "KEYCODE_DPAD_RIGHT");
+		put(40, "KEYCODE_DPAD_DOWN");
 		put(32, "KEYCODE_SPACE");
 		put(44, "KEYCODE_COMMA");
 		put(46, "KEYCODE_PERIOD");
@@ -124,7 +130,7 @@ public class KeyCodes {
     		keyName = KEY_NAMES[keyCode - 'a' + NAME_TO_CODE.get("KEYCODE_A")];
 		} else if (keyCode >= 'A' && keyCode <= 'Z') {
     		keyName = KEY_NAMES[keyCode - 'A' + NAME_TO_CODE.get("KEYCODE_A")];
-    		shift  = true;
+    		shift = true;
     	} else {
     		keyName = TRANSLATE.get(keyCode);
     	}
