@@ -12,6 +12,7 @@ import com.android.chimpchat.adb.AdbBackend;
 import com.android.chimpchat.core.IChimpDevice;
 import com.android.chimpchat.core.IChimpImage;
 import com.android.chimpchat.core.TouchPressType;
+import com.android.webscreen.KeyCodes.AndroidKey;
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 
@@ -80,15 +81,15 @@ public class ScreenServer extends NanoHTTPD {
 	}
 
 	private void sendKey(int keyCode) {
-    	String keyName = KeyCodes.map(keyCode);
-    	if (keyName != null) {
-    		if (KeyCodes.shift) {
+    	AndroidKey key = KeyCodes.map(keyCode);
+    	if (key != null) {
+    		if (key.shift()) {
     			System.out.println("MAJ");
     			device.press("KEYCODE_SHIFT_LEFT", TouchPressType.DOWN);
-    			device.press(keyName, TouchPressType.DOWN_AND_UP);
+    			device.press(key.getName(), TouchPressType.DOWN_AND_UP);
     			device.press("KEYCODE_SHIFT_LEFT", TouchPressType.UP);
     		} else {
-    			device.press(keyName, TouchPressType.DOWN_AND_UP);
+    			device.press(key.getName(), TouchPressType.DOWN_AND_UP);
     		}
     	}
     }

@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class KeyCodes {
-	public static final String[] KEY_NAMES = {
+	private static final String[] KEY_NAMES = {
 		"KEYCODE_UNKNOWN",
 		"KEYCODE_SOFT_LEFT",
 		"KEYCODE_SOFT_RIGHT",
@@ -99,13 +99,13 @@ public class KeyCodes {
 		"KEYCODE_MUTE",
 	};
 	
-	private static Map<String, Integer> NAME_TO_CODE = new HashMap<String, Integer>() {{
+	private static final Map<String, Integer> NAME_TO_CODE = new HashMap<String, Integer>() {{
 		for (int i = 0; i < KEY_NAMES.length; i++) {
 			put(KEY_NAMES[i], i);
 		}
 	}};
 	
-	private static Map<Integer, String> TRANSLATE = new HashMap<Integer, String>() {{
+	private static final Map<Integer, String> TRANSLATE = new HashMap<Integer, String>() {{
 		put(8, "KEYCODE_DEL");
 		put(13, "KEYCODE_ENTER");
 		put(27, "KEYCODE_BACK");
@@ -119,11 +119,9 @@ public class KeyCodes {
 		put(46, "KEYCODE_PERIOD");
 	}};
 
-	public static boolean shift = false;
-
-	public static String map(int keyCode) {
-		String keyName = null;
-		shift = false;
+	public static AndroidKey map(int keyCode) {
+		String keyName;
+		boolean shift = false;
 		if (keyCode >= '0' && keyCode <= '9') {
 			keyName = KEY_NAMES[keyCode - '0' + NAME_TO_CODE.get("KEYCODE_0")];
 		} else if (keyCode >= 'a' && keyCode <= 'z') {
@@ -134,6 +132,28 @@ public class KeyCodes {
     	} else {
     		keyName = TRANSLATE.get(keyCode);
     	}
-    	return keyName;
+    	if (keyName == null) {
+    		return null;
+    	} else {
+    		return new AndroidKey(keyName, shift);
+    	}
+	}
+	
+	public static class AndroidKey {
+		private final String name;
+		private final boolean shift;
+		
+		private AndroidKey(String name, boolean shift) {
+			this.name = name;
+			this.shift = shift;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public boolean shift() {
+			return shift;
+		}
 	}
 }

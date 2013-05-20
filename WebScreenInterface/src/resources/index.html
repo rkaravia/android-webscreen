@@ -38,6 +38,7 @@
       sendMouseEvent();
     }
     
+    var specialKeys = [8, 27, 36, 37, 38, 39, 40];
     var keyQueue = [];
     var keySending = false;
     function sendKey() {
@@ -73,7 +74,7 @@
         sendKey();
       });
       $('html').keydown(function(e) {
-        if (e.which <= 46) {
+        if (specialKeys.indexOf(e.which) != -1) {
           if (e.which == 8) {
             e.preventDefault();
           }
