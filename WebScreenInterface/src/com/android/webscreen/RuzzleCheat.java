@@ -33,11 +33,11 @@ public class RuzzleCheat {
 	}
 	
 	private int getX(int panelID) {
-		return MARGIN_LEFT + (panelID % 4) * SIZE * STD_WIDTH / width;
+		return MARGIN_LEFT + (panelID % 4) * SIZE * width / STD_WIDTH;
 	}
 	
 	private int getY(int panelID) {
-		return MARGIN_TOP + (panelID / 4) * SIZE * STD_WIDTH / width;
+		return MARGIN_TOP + (panelID / 4) * SIZE * width / STD_WIDTH;
 	}
 	
 	/**
