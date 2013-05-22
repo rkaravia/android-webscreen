@@ -8,3 +8,5 @@ This repo contains
 - A modified version of [chimpchat](http://omapzoom.org/?p=platform/sdk.git;a=tree;f=chimpchat), which allows emulation of arbitrary touch paths
 - A [small web app](WebScreenInterface/src/com/android/webscreen/ScreenServer.java), which lets you navigate your Android device through your web browser
 - A [class](WebScreenInterface/src/com/android/webscreen/RuzzleCheat.java) for generating touch paths on the 4x4 [Ruzzle](http://www.ruzzle-game.com/) grid
+
+The server uses [NanoHttpd](https://github.com/NanoHttpd/nanohttpd), see [LICENSE-nanohttpd.md](LICENSE-nanohttpd.md).
